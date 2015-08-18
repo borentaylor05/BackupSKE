@@ -26,7 +26,7 @@ class DocumentsController < ApplicationController
 					resp = jive.get_doc(row[0])
 					if resp and resp["list"]
 						html = jive.get_doc_html(resp)
-						doc = Document.new(title: resp["list"][0]["subject"], body: html, client: client)
+						doc = Document.new(title: resp["list"][0]["subject"], body: html, link: row[0].strip, client: client)
 						if doc.save 
 							doc.save
 							@created.push resp["list"][0]["subject"]
