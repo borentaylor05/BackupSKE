@@ -1,0 +1,17 @@
+<% if @client %>
+	<div ng-app="App" ng-controller="DocCtrl as doc">
+		<h1>Upload Documents for <%= @client.name.upcase %> </h1>
+			<div class="alert alert-warning">
+				Data must be uploaded in CSV format and must be UTF-8 encoded.  The best way to ensure UTF-8 encoding is to upload your .csv file to Google Spreadsheets, then download that file and upload it here.
+			</div>
+
+			<%= form_tag "/documents/process-upload/#{@client.name.downcase}", multipart: true do %>
+			  	<%= file_field_tag :file %>
+			  	<%= hidden_field_tag :client, params[:client] %>
+			  	<br/>
+			  	<%= submit_tag "Upload", class: "btn btn-md btn-success" %>
+			<% end %>
+	</div>
+<% else %>
+	<div class="alert alert-danger"> <%= "Client #{params[:client].upcase} does not exist." %> </div>
+<% end %>

@@ -1,0 +1,48 @@
+<h1 style="float:left;">Results</h1>
+<h2 style="float:right;">
+	<%= link_to "View #{params[:client].upcase} Documents", "/documents/#{params[:client].downcase}" %>
+</h2>
+<div style="clear:both"></div>
+<div class="row results">
+	<div class="col-xs-6 error">
+		<p class="big">Errors: <span id="errorCount"> 0 </span> </p>
+		<ul>
+			<% @errors.each do |e| %>
+				<li> <%= e %> </li>
+			<% end %>
+		</ul>
+	</div>
+	<div class="col-xs-6 created">
+		<p class="big">Created: <span id="createdCount"> 0 </span> </p>
+		<ul>
+			<% @created.each do |e| %>
+				<li> <%= e %> </li>
+			<% end %>
+		</ul>	
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	var options = {
+	  useEasing : true, 
+	  useGrouping : true, 
+	  separator : ',', 
+	  decimal : '.', 
+	  prefix : '', 
+	  suffix : '' 
+	};
+	
+	var errorCount = "<%= @error_count || 0 %>";
+	var createdCount = "<%= @created_count || 0 %>";
+	var duration = 4;
+	if(errorCount > 0){
+		var numAnim = new CountUp("errorCount", 0, errorCount, 0, duration, options);	
+		numAnim.start();	
+	}
+	if(createdCount > 0){
+		var numAnim2 = new CountUp("createdCount", 0, createdCount, 0, duration, options);	
+		numAnim2.start();
+	}		
+
+</script>

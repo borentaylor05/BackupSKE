@@ -1,0 +1,13 @@
+<div ng-app="App" ng-controller="GetDocsCtrl as docs">
+	<h1>Documents</h1>
+	<input type="text" class="form-control" ng-model="filter">
+	<% if !@client %>
+		<div class="alert alert-danger"> No client <%= params[:client] %> </div>
+	<% end %>
+
+	<ul class="docs">
+		<li ng-repeat="doc in docs.all | filter:filter"> 
+			<a ng-href="/documents/{{docs.client}}/{{doc.id}}"> {{ doc.title }} </a>
+		</li>
+	</ul>
+</div>

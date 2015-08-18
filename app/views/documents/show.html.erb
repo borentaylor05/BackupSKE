@@ -1,0 +1,8 @@
+<% if @doc %>
+	<div class="container">
+		<h1><%= @doc.title %></h1>
+		<%=raw @doc.body %> 
+	</div>
+<% else %>
+	<div class="alert alert-danger">Document does not exist.</div>
+<% end %>
