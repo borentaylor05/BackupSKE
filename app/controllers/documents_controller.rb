@@ -21,7 +21,11 @@ class DocumentsController < ApplicationController
 		jive = Jive.new('social')
 		@errors, @created = [], []
 		if client
-			CSV.foreach(params[:file].path) do |row|
+			contents = File.open(params[:file].path, 'r+').read
+			new_file = File.new(params[:file].path, 'w+')
+			new_file.write(contents.encode!('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: ''))
+			new_file.read
+			CSV.foreach(new_file.path, headers: true) do |row|
 				if row[0]
 					resp = jive.get_doc(row[0])
 					if resp and resp["list"]
@@ -38,7 +42,7 @@ class DocumentsController < ApplicationController
 							end
 						end
 					else
-						@errors.push resp
+						@errors.push "#{row[0]} -- #{resp}"
 					end
 				end
 			end

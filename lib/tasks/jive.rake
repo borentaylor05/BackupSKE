@@ -20,3 +20,7 @@ task parse_link: :environment do
 	jive = Jive.new('social')
 	puts jive.parse_link("https://social.teletech.com/docs/DOC-414110")
 end
+
+task remove_docs: :environment do 
+	Document.destroy_all
+end
