@@ -3,24 +3,24 @@ class DocumentsController < ApplicationController
 	require 'Jive'
 
 	def index
-		@client = Client.find_by(name: params[:client].downcase)
+		@client = Client.find_by(token: params[:token])
 		@docs = Document.where(client: @client)
 	end
 
 	def show
-		@client = Client.find_by(name: params[:client].downcase)
+		@client = Client.find_by(token: params[:token])
 		@doc = Document.find_by(id: params[:id], client: @client)
 	end
 
 	def upload
-		@client = Client.find_by(name:params[:client])
+		@client = Client.find_by(token: params[:token])
 	end
 
 	def process_upload		
-		client = Client.find_by(name: params[:client].downcase.strip)		
+		@client = Client.find_by(token: params[:token].downcase.strip)		
 		jive = Jive.new('social')
 		@errors, @created = [], []
-		if client
+		if @client
 			contents = File.open(params[:file].path, 'r+').read
 			new_file = File.new(params[:file].path, 'w+')
 			new_file.write(contents.encode!('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: ''))
@@ -47,14 +47,14 @@ class DocumentsController < ApplicationController
 				end
 			end
 		else
-			@errors.push "Client #{params[:client]} not found."
+			@errors.push "Client #{params[:token]} not found."
 		end
 		@error_count = @errors.size
 		@created_count = @created.size
 	end
 
 	def api_get_documents
-		client = Client.find_by(name: params[:client])
+		client = Client.find_by(token: params[:token])
 		if client
 			respond({ status: 200, docs: Document.where(client: client) })
 		else

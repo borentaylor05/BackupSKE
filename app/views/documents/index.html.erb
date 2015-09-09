@@ -2,7 +2,7 @@
 	<h1>Documents</h1>
 	<input type="text" class="form-control" ng-model="filter">
 	<% if !@client %>
-		<div class="alert alert-danger"> No client <%= params[:client] %> </div>
+		<div class="alert alert-danger"> No client for token <%= params[:token] %> </div>
 	<% end %>
 
 	<ul class="docs">

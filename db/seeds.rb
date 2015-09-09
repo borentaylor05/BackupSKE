@@ -10,5 +10,6 @@
 clients = ["all", "arc", "ww", "fairfax", "spark", "cdc", "hrsa", "hyundai"]
 
 clients.each do |client|
-	Client.create!(name: client)
+	token = Client.generate_token(10)
+	Client.create!(name: client, token: token)
 end

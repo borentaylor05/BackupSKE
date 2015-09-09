@@ -1,6 +1,6 @@
 <h1 style="float:left;">Results</h1>
 <h2 style="float:right;">
-	<%= link_to "View #{params[:client].upcase} Documents", "/documents/#{params[:client].downcase}" %>
+	<%= link_to "View #{@client.name.upcase} Documents", "/documents/#{params[:token].downcase}" %>
 </h2>
 <div style="clear:both"></div>
 <div class="row results">
