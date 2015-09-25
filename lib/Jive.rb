@@ -44,6 +44,7 @@ class Jive
 
 	def grab(resource)
 	    json = HTTParty.get("#{@url}#{resource}", @options).body
+	    puts json
 	    if json 
 	      clean(json)
 	    else
