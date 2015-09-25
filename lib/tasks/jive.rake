@@ -24,3 +24,8 @@ end
 task remove_docs: :environment do 
 	Document.destroy_all
 end
+
+task jive_test_connection: :environment do 
+	jive = Jive.new('social')
+	puts jive.grab('/people/98086')
+end
