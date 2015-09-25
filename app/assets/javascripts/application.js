@@ -13,8 +13,6 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require angular/angular
-//= require angular-sanitize/angular-sanitize
 //= require countUp.js/countUp.min.js
 //= require turbolinks
 //= require_tree .

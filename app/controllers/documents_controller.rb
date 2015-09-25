@@ -4,6 +4,7 @@ class DocumentsController < ApplicationController
 
 	def index
 		@client = Client.find_by(token: params[:token])
+		@token = @client.token
 		@docs = Document.where(client: @client)
 	end
 
