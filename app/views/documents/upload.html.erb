@@ -5,7 +5,7 @@
 				Data must be uploaded in CSV format and must be UTF-8 encoded.  The best way to ensure UTF-8 encoding is to upload your .csv file to Google Spreadsheets, then download that file and upload it here.
 			</div>
 
-			<%= form_tag "/documents/process-upload/#{@client.name.downcase}", multipart: true do %>
+			<%= form_tag "/documents/process-upload/#{@client.token}", multipart: true do %>
 			  	<%= file_field_tag :file %>
 			  	<%= hidden_field_tag :client, params[:client] %>
 			  	<br/>

@@ -3,7 +3,6 @@ require 'Auth'
 class Jive
 
 	include HTTParty
-	
 
 	def initialize(instance)
 		@proxy = URI(ENV["QUOTAGUARDSTATIC_URL"]) if ENV["QUOTAGUARDSTATIC_URL"]
